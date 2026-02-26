@@ -184,15 +184,15 @@ python main.py "基于生成的图片训练一个LoRA模型"
 
 项目内置了完整的DiffSynth-Studio文档，位于`my_diffsynth_studio/DiffSynth-Studio/docs/`：
 
-- [中文文档](my_diffsynth_studio/DiffSynth-Studio/docs/zh/README.md)
-- [English Docs](my_diffsynth_studio/DiffSynth-Studio/docs/en/README.md)
+- [中文文档](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/zh/README.md)
+- [English Docs](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/en/README.md)
 
 支持的模型详情请参考：
-- [FLUX](my_diffsynth_studio/DiffSynth-Studio/docs/zh/Model_Details/FLUX.md)
-- [Qwen-Image](my_diffsynth_studio/DiffSynth-Studio/docs/zh/Model_Details/Qwen-Image.md)
-- [Z-Image](my_diffsynth_studio/DiffSynth-Studio/docs/zh/Model_Details/Z-Image.md)
-- [Wan](my_diffsynth_studio/DiffSynth-Studio/docs/zh/Model_Details/Wan.md)
-- [LTX-2](my_diffsynth_studio/DiffSynth-Studio/docs/zh/Model_Details/LTX-2.md)
+- [FLUX](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/zh/Model_Details/FLUX.md)
+- [Qwen-Image](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/zh/Model_Details/Qwen-Image.md)
+- [Z-Image](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/zh/Model_Details/Z-Image.md)
+- [Wan](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/zh/Model_Details/Wan.md)
+- [LTX-2](https://github.com/modelscope/DiffSynth-Studio/blob/main/docs/zh/Model_Details/LTX-2.md)
 
 ## 架构设计
 
