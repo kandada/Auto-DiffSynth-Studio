@@ -1,0 +1,47 @@
+# 核心依赖
+openai>=1.0.0
+aiohttp>=3.9.0
+aiofiles>=23.0.0
+pydantic>=2.0.0
+pyyaml>=6.0
+
+# 异步和工具
+asyncio-mqtt>=0.16.0
+python-multipart>=0.0.6
+
+# 开发工具
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
+pytest-benchmark>=4.0.0
+hypothesis>=6.0.0
+black>=23.0.0
+mypy>=1.5.0
+
+# 其他
+tiktoken
+
+# DiffSynth-Studio 依赖
+torch>=2.0.0
+torchvision
+transformers
+imageio
+imageio[ffmpeg]
+safetensors
+einops
+sentencepiece
+protobuf
+modelscope
+ftfy
+pandas
+accelerate
+peft
+datasets
+
+# 可选：向量数据库（用于高级上下文管理）
+# chromadb>=0.4.0
+# sentence-transformers>=2.2.0
+
+# 可选：沙箱环境
+# docker>=6.0.0
+# paramiko>=3.0.0  # SSH连接
