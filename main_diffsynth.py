@@ -15,10 +15,17 @@ import sys
 import time
 from pathlib import Path
 from typing import Optional, Dict, Any, List
-from core.main_agent import MainAgent
-from utils.context_manager import ContextManager
-from utils.safety import SafetyGuard
-from config import settings
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from aacode.core.main_agent import MainAgent
+    from aacode.utils.context_manager import ContextManager
+    from aacode.utils.safety import SafetyGuard
+    from aacode.config import settings
+else:
+    from .core.main_agent import MainAgent
+    from .utils.context_manager import ContextManager
+    from .utils.safety import SafetyGuard
+    from .config import settings
 
 WORK_DIR_NAME = "my_diffsynth_studio"
 
@@ -65,7 +72,10 @@ class AICoder:
         # 所有工具都会使用target_project作为基准路径
 
         # 初始化核心组件（使用target_project作为安全护栏的基准）
-        self.safety_guard = SafetyGuard(self.target_project)
+        self.safety_guard = SafetyGuard(
+            self.target_project,
+            dangerous_command_action=settings.safety.dangerous_command_action,
+        )
         # 上下文管理器使用aacode工作目录（存放日志等）
         self.context_manager = ContextManager(self.project_path)
         # 主Agent使用目标项目目录（实际操作目录）
@@ -116,8 +126,11 @@ class AICoder:
     def _init_class_method_mapper(self):
         """初始化类方法映射器"""
         try:
-            # 尝试使用增强版映射器（现在在class_method_mapper.py中）
-            from utils.class_method_mapper import EnhancedClassMethodMapper
+            # 尝试使用增强版映射器
+            if __package__ in (None, ""):
+                from utils.class_method_mapper import EnhancedClassMethodMapper
+            else:
+                from .utils.class_method_mapper import EnhancedClassMethodMapper
 
             self.class_method_mapper = EnhancedClassMethodMapper(self.target_project)
             print("✅ 增强版类方法映射器初始化成功（支持多语言）")
@@ -125,7 +138,10 @@ class AICoder:
             print(f"⚠️  无法导入增强版类方法映射器: {e}")
             try:
                 # 回退到基础版映射器
-                from utils.class_method_mapper import ClassMethodMapper
+                if __package__ in (None, ""):
+                    from utils.class_method_mapper import ClassMethodMapper
+                else:
+                    from .utils.class_method_mapper import ClassMethodMapper
 
                 self.class_method_mapper = ClassMethodMapper(self.target_project)
                 print("✅ 基础版类方法映射器初始化成功（仅Python）")
@@ -134,7 +150,10 @@ class AICoder:
                 self.class_method_mapper = None
 
         # 初始化to-do-list管理器（使用aacode工作目录）
-        from utils.todo_manager import get_todo_manager
+        if __package__ in (None, ""):
+            from utils.todo_manager import get_todo_manager
+        else:
+            from .utils.todo_manager import get_todo_manager
 
         self.todo_manager = get_todo_manager(self.project_path)
 
@@ -594,7 +613,7 @@ async def main():
     # 加载环境变量配置
     env_file = Path(".env")
     if env_file.exists():
-        with open(env_file, "r") as f:
+        with open(env_file, "r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
                 if line and "=" in line and not line.startswith("#"):
